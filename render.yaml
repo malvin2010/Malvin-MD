@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: malvin-md
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node website/server.js
+    envVars:
+      - key: PAIRING_METHOD
+        value: code
+      - key: PORT
+        value: 3000
+      - key: API_BASE
+        value: https://api.giftedtech.web.id/api
+      - key: API_KEY
+        value: gifted
