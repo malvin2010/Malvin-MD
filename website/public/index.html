@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malvin MD | Pair Your Bot</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-ring"><span>M</span></div>
+    <span class="brand-name">Malvin <em>MD</em></span>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#pair">Pair</a>
+    <a href="#stats">Stats</a>
+    <a href="https://whatsapp.com/channel/0029Vb7Eyki7T8bSNsTtjv1q" target="_blank">Channel</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn">☰</button>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <span class="pill">🟢 24/7 Support • Premium Multi-Device</span>
+    <h1>MALVIN <span>MD</span></h1>
+    <p class="tagline">The fastest, most premium WhatsApp bot built by <strong>Malvin C</strong>.<br>123 real commands. Zero placeholders. Pure speed.</p>
+  </section>
+
+  <section class="pair-section" id="pair">
+    <div class="card connect-card">
+      <div class="card-icon whatsapp">📱</div>
+      <h2>Connect WhatsApp</h2>
+      <p class="status"><span class="dot green"></span> Server Online</p>
+
+      <div id="pairForm">
+        <input type="tel" id="numberInput" placeholder="e.g. 263780026088 (with country code, no +)">
+        <button id="pairBtn">Get Pairing Code</button>
+      </div>
+
+      <div id="codeBox" class="code-box hidden">
+        <p>Your pairing code:</p>
+        <div class="code" id="codeText">------</div>
+        <ol>
+          <li>Open WhatsApp → Settings → Linked Devices</li>
+          <li>Tap "Link a device"</li>
+          <li>Tap "Link with phone number instead"</li>
+          <li>Enter the code above</li>
+        </ol>
+      </div>
+
+      <div id="successBox" class="success-box hidden">
+        <div class="check">✅</div>
+        <p>Connected successfully!</p>
+        <p class="small">You've been linked to the official Malvin MD channel. Type <b>.menu</b> in WhatsApp to get started.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section" id="stats">
+    <h3><span class="bar"></span> LIVE SERVER STATS</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num" id="statActive">--</div>
+        <div class="stat-label"><span class="dot green"></span> ACTIVE NOW</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statPaired">--</div>
+        <div class="stat-label">TOTAL PAIRED</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statUsers">--</div>
+        <div class="stat-label">TOTAL USERS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statCapacity">--%</div>
+        <div class="stat-label">CAPACITY</div>
+      </div>
+    </div>
+
+    <div class="server-panel">
+      <div class="server-row">
+        <span><span class="dot green"></span> <b>Malvin-X Engine</b></span>
+        <span class="tag online">Online</span>
+      </div>
+      <div class="progress"><div class="progress-fill" id="capacityBar"></div></div>
+      <div class="server-meta">
+        <span>🌐 Sessions: <b id="metaSessions">0</b></span>
+        <span>⚡ Commands: <b>123</b></span>
+        <span>🕐 Uptime: <b id="metaUptime">just started</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature"><span>⚡</span><h4>123 Real Commands</h4><p>Every command works. No placeholders, no "coming soon".</p></div>
+    <div class="feature"><span>🎬</span><h4>Media Downloads</h4><p>Play music, download video, TikTok, Instagram & more.</p></div>
+    <div class="feature"><span>💎</span><h4>Premium Menu</h4><p>Interactive buttons and a channel-branded experience.</p></div>
+    <div class="feature"><span>🤖</span><h4>Malvin AI</h4><p>Auto-corrects mistyped commands in real time.</p></div>
+  </section>
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Malvin MD — Built by Malvin C</p>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
