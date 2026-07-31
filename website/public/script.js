@@ -69,4 +69,19 @@ setInterval(() => {
   const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
   const s = String(secs % 60).padStart(2, '0');
   document.getElementById('metaUptime').textContent = `${h}:${m}:${s}`;
-}, 1000);
+}, 1000);async function getCode(){
+  let num = document.getElementById('number').value
+  if(!num) return alert("Enter number with country code. Ex: 263780026088")
+  document.getElementById('code').innerText = "Generating code..."
+  
+  let res = await fetch('/code?number=' + num)
+  let data = await res.json()
+  
+  if(data.error) {
+    document.getElementById('code').innerText = "❌ " + data.error
+    document.getElementById('code').style.color = "red"
+  } else {
+    document.getElementById('code').innerText = '✅ CODE: ' + data.code
+    document.getElementById('code').style.color = "lime"
+  }
+      }
