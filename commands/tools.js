@@ -1,6 +1,4 @@
 const axios = require('axios');
-const { create, all } = require('mathjs');
-const math = create(all);
 const QRCode = require('qrcode');
 const config = require('../config');
 const { sendText, sendImage } = require('../lib/sendMsg');
