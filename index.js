@@ -3,40 +3,40 @@ const figlet = require('figlet');
 const config = require('./config');
 const express = require('express')
 const path = require('path')
-const fs = require('fs') // added for auto pair
 const app = express()
 const PORT = process.env.PORT || 3000
 
 // Serve all files in website/public
 app.use(express.static(path.join(__dirname, 'website/public')))
 
-app.listen(PORT, () => console.log(`Web + Bot running on ${PORT}`))
+// PAIRING API - This makes the website button work
+app.get('/code', async (req, res) => {
+  const number = req.query.number
+  if(!number) return res.json({ error: "Please enter number with country code. Ex: 263780026088" })
+  
+  if(!global.sock) return res.json({ error: "Bot not ready yet. Wait 5 seconds and try again." })
+  
+  try {
+    let code = await global.sock.requestPairingCode(number)
+    code = code?.match(/.{1,4}/g)?.join("-") || code // format 1234-5678
+    res.json({ code })
+  } catch(e) {
+    console.log(chalk.red("Pairing Error:", e))
+    res.json({ error: "Failed to generate code. Is number correct?" })
+  }
+})
+
+app.listen(PORT, () => console.log(chalk.blue(`Web + Bot running on ${PORT}`)))
 
 const { startBot } = require('./lib/connect');
 
 console.log(chalk.cyan(figlet.textSync('Malvin MD', { horizontalLayout: 'full' })));
 console.log(chalk.yellow(`By ${config.CREATOR} • v${config.VERSION}\n`));
 
-const PHONE_NUMBER = "263780026088" // <-- YOUR NUMBER HERE, no +
-
 startBot({
   onReady: async (sock) => {
+    global.sock = sock // Make sock available for /code route
     console.log(chalk.green(`${config.BOT_NAME} is online and listening for commands.`));
-    
-    // AUTO PAIR CODE
-    if (!fs.existsSync('./session/creds.json')) { // only if no session
-        await new Promise(resolve => setTimeout(resolve, 3000)) // wait 3s for socket
-        try {
-            let code = await sock.requestPairingCode(PHONE_NUMBER)
-            code = code?.match(/.{1,4}/g)?.join("-") || code
-            console.log(chalk.magenta.bold(`\n🔥 YOUR PAIRING CODE: ${code} 🔥`))
-            console.log(chalk.white(`Go to WhatsApp on ${PHONE_NUMBER} > Settings > Linked Devices > Link with phone number`))
-        } catch (e) {
-            console.log(chalk.red("Failed to get pairing code:", e))
-        }
-    } else {
-        console.log(chalk.blue("Session found. Skipping auto pair."))
-    }
   },
 });
 
