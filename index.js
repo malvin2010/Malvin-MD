@@ -1,6 +1,8 @@
 const chalk = require('chalk');
 const figlet = require('figlet');
 const config = require('./config');
+const http = require('http');
+http.createServer((req, res) => res.end('Bot running')).listen(process.env.PORT || 3000);
 const { startBot } = require('./lib/connect');
 
 console.log(chalk.cyan(figlet.textSync('Malvin MD', { horizontalLayout: 'full' })));
