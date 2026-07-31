@@ -1,8 +1,15 @@
 const chalk = require('chalk');
 const figlet = require('figlet');
 const config = require('./config');
-const http = require('http');
-http.createServer((req, res) => res.end('Bot running')).listen(process.env.PORT || 3000);
+const express = require('express')
+const path = require('path')
+const app = express()
+const PORT = process.env.PORT || 3000
+
+// Serve all files in website/public
+app.use(express.static(path.join(__dirname, 'website/public')))
+
+app.listen(PORT, () => console.log(`Web + Bot running on ${PORT}`))
 const { startBot } = require('./lib/connect');
 
 console.log(chalk.cyan(figlet.textSync('Malvin MD', { horizontalLayout: 'full' })));
